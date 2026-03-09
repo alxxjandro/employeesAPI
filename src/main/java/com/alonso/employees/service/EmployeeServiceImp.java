@@ -24,7 +24,6 @@ public class EmployeeServiceImp implements EmployeeService{
         return employeeDAO.findAll();
     }
 
-    @Transactional
     @Override
     public Employee findById(long theID) {
         Employee theEmployee = employeeDAO.findById(theID);
@@ -38,9 +37,11 @@ public class EmployeeServiceImp implements EmployeeService{
         return employeeDAO.save(theEmployee);
     }
 
+    @Transactional
     @Override
     public Employee update(long id, EmployeeRequest employeeRequest) {
-        return null;
+        Employee theEmployee = convertToEmployee(id, employeeRequest);
+        return employeeDAO.save(theEmployee);
     }
 
     @Override
